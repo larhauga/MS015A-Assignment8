@@ -3,6 +3,7 @@
 import os, sys
 import rrdtool
 import simple_snmp
+import time
 
 def cpu_rrd():
     filename = "CPU.rrd"
