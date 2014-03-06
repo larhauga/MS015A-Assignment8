@@ -32,4 +32,6 @@ if __name__ == '__main__':
     hostname= (1,3,6,1,2,1,1,1,0)
 
     print snmp_get(host, hostname)
-    print snmp_get(host)
+    print snmp_get(host, cpu1min)
+    print snmp_get(host, cpu5min)
+    print snmp_get(host, cpu15min)
