@@ -11,11 +11,16 @@ def snmp_get(host):
     variables = (1,3,6,1,2,1,1,1,0)
     err_ind, err_status, err_index, result = cmdg.getCmd(commdata, transport,
             variables)
-    print err_ind
-    print err_index
-    print err_status
-    print result
 
+    if err_ind:
+        print(err_ind)
+    else:
+        if err_status:
+            print('%s at %s' % (err_status.prettyPrint(),
+                            error_ind and result[int(errorIndex)-1]) or '?')
+        else:
+            for name, val in result:
+                print("%s: %s" % (name.prettyPrint(), val.prettyPrint()))
 
 if __name__ == '__main__':
     print snmp_get("localhost")
