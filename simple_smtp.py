@@ -20,12 +20,16 @@ def snmp_get(host, variables):
                             error_ind and result[int(errorIndex)-1]) or '?')
             return None
         else:
-            for name, val in result:
-                print("%s: %s" % (name.prettyPrint(), val.prettyPrint()))
             return result
 
-if __name__ == '__main__':
-    host    = "localhost"
+def snmp_cpuload():
+    result = snmp_get("localhost", (1,3,6,1,4,1,2021,10,1,3,1))
+    if result:
+        print result[0][1]
+    else:
+        print "-1"
+
+def snmp_all(host):
     cpu1min = (1,3,6,1,4,1,2021,10,1,3,1)
     cpu5min = (1,3,6,1,4,1,2021,10,1,3,2)
     cpu15min= (1,3,6,1,4,1,2021,10,1,3,3)
@@ -35,3 +39,7 @@ if __name__ == '__main__':
     print snmp_get(host, cpu1min)
     print snmp_get(host, cpu5min)
     print snmp_get(host, cpu15min)
+    print snmp_cpuload()
+
+if __name__ == '__main__':
+    snmp_cpuload()
