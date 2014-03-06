@@ -2,7 +2,7 @@
 
 import os, sys
 import rrdtool
-import simple_smtp
+import simple_snmp
 
 def cpu_rrd():
     filename = "CPU.rrd"
@@ -13,8 +13,11 @@ def cpu_rrd():
                 'DS:%s:GAUGE:%d:U:U' % (database_name, 60),
                 'RRA:AVERAGE:0.5:1:120')
 
-    rrdtool.update('CPU.rrd', '%d:%s' % (int(time.time()),
-        float(simple_smtp.snmp_cpuload())))
+    ret = rrdtool.update(filename, '%d:%s' % (int(time.time()),
+            float(simple_snmp.snmp_cpuload())))
+    print "Time: %d," % (time.time(), simple_snmp.snmp_cpuload())
+    if ret:
+        print rrdtool.error()
 
 def cpu_graph():
     ret = rrdtool.graph( "net.png", "--start", "-1d", "--vertical-label=CPU Load",
