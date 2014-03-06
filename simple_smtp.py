@@ -4,8 +4,8 @@ from pysnmp.entity.rfc3413.oneliner import cmdgen
 
 def snmp_get(host):
     community = 'public'
-    #cg = cmdgen.CommandGenerator()
-    #comm_data = cmdgen.CommunityData('','public')
+
+    cmdGen = cmdgen.CommandGenerator()
 
     errorIndication, errorStatus, errorIndex, varBinds = cmdGen.getCmd(
         cmdgen.CommunityData(community),
