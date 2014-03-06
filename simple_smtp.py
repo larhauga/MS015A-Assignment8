@@ -27,5 +27,5 @@ def snmp_get(host):
             for name, val in varBinds:
                 print('%s = %s' % (name.prettyPrint(), val.prettyPrint()))
 
-if __name__ == '__name__':
+if __name__ == '__main__':
     print snmp_get("localhost")
