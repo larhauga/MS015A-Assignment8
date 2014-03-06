@@ -14,9 +14,10 @@ def cpu_rrd():
                 'DS:%s:GAUGE:%d:U:U' % (database_name, 60),
                 'RRA:AVERAGE:0.5:1:120')
 
-    ret = rrdtool.update(filename, '%d:%s' % (int(time.time()),
+    ret = rrdtool.update(filename, '%d:%f' % (int(time.time()),
             float(simple_snmp.snmp_cpuload())))
-    print "Time: %d," % (time.time(), simple_snmp.snmp_cpuload())
+    print "Added entry, Time: %d, CPU: %f" % (int(time.time()),
+            float(simple_snmp.snmp_cpuload()))
     if ret:
         print rrdtool.error()
 
