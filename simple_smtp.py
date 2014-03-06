@@ -25,9 +25,9 @@ def snmp_get(host, variables):
 def snmp_cpuload():
     result = snmp_get("localhost", (1,3,6,1,4,1,2021,10,1,3,1))
     if result:
-        print result[0][1]
+        return float(result[0][1])
     else:
-        print "-1"
+        return float(-1)
 
 def snmp_all(host):
     cpu1min = (1,3,6,1,4,1,2021,10,1,3,1)
