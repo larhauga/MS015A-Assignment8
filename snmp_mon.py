@@ -11,13 +11,15 @@ def cpu_rrd():
     heartbeat = 60
     if not os.path.exists(filename):
         rrdtool.create(filename,
-                'DS:%s:GAUGE:%d:U:U' % (database_name, 60),
+                '--step',
+                heartbeat,
+                'DS:%s:GAUGE:%d:U:U' % (database_name, heartbeat),
                 'RRA:AVERAGE:0.5:1:120')
 
     ret = rrdtool.update(filename, '%d:%f' % (int(time.time()),
-            float(simple_snmp.snmp_cpuload())))
+            str(simple_snmp.snmp_cpuload())))
     print "Added entry, Time: %d, CPU: %f" % (int(time.time()),
-            float(simple_snmp.snmp_cpuload()))
+            str(simple_snmp.snmp_cpuload()))
     if ret:
         print rrdtool.error()
 
