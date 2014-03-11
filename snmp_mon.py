@@ -11,7 +11,7 @@ def cpu_rrd():
     heartbeat = 60 # The time available for input
     if not os.path.exists(filename):
         rrdtool.create(filename,
-		'--start', 
+		'--start',
 		'now',
 		'--step',
 		'60', # How often the data is collected
@@ -27,9 +27,9 @@ def cpu_rrd():
         print rrdtool.error()
 
 def cpu_graph():
-    ret = rrdtool.graph( "net.png", 
-	"--start", 
-	"-1h", 
+    ret = rrdtool.graph( "cpu.png",
+	"--start",
+	"-1h",
 	"--vertical-label=CPU Load",
         "DEF:CPU_Usage=CPU.rrd:CPU_Usage:AVERAGE",
         "AREA:CPU_Usage#00FF00:CPU",
